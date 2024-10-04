@@ -5,60 +5,73 @@ const caixaResultado = document.querySelector('.caixa-resultado');
 
 const perguntas = [//abre a lista de objetos (itens)
     {//abre o item
-        enunciado:"Você gosta da Inteligência Artificial?",
-        alternativas:[{
-            texto:"sim",
-            afirmação:"afirmação da alternativa 1"
+        enunciado: "Você gosta da Inteligência Artificial?",
+        alternativas: [{
+            texto: "Sim",
+            afirmação: "Afirmação da alternativa 1"
         },
-
+        {
+            texto: "Não",
+            afirmação: "Afirmação da alternativa"
+        }
+        ]
     },
     {
-        texto:"Não",
-        afirmação:"afirmação da alternativa"
-    }
-    ]
-        enunciado:"Você utililiza a inteligencia artificial no dia a dia",
-        alternativas:[{alternativas:[{
-            texto:"sim",
-            afirmação:"afirmação da alternativa 1"
+        enunciado: "Você utiliza inteligencia artificial no trabalho",
+        alternativas: [{
+            texto: "utilizo",
+            afirmação: "Afirmação da alternativa 1"
         },
-    },
-
-},
-{
-    texto:"Não",
-    afirmação:"afirmação da alternativa"
+        {
+            texto:"Não utilizo",
+            afirmação:"Afirmação da alternativa 2"
+        }
+        ]
     },
     {
-        enunciado:"Você acha que ela consegue te ajudar no trabalho",
-        alternativas:[{
-            texto:"sim",
-            afirmação:"afirmação da alternativa 1"
+        enunciado: "Te ajuda muito no seu trabalho",
+        alternativas: [{
+            texto: "Sim",
+            afirmação: "Afirmação da alternativa 1"
         },
-
-    },
-    {
-        texto:"Não",
-        afirmação:"afirmação da alternativa"
+        {
+            texto: "Não",
+            afirmação: "Afirmação da alternativa"
+        }
+        ]
     }
 ]
 let posicao = 0;
 let perguntaAtual;
+let respostas = "";
 
-function mostraPergunta(){
+
+function mostraPergunta() {
+    if (posicao>=perguntas.length){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[posicao];
     caixaPergunta.textContent = perguntaAtual.enunciado;
+    caixaAlternativa.textContent = " ";
     mostraAlternativas();
 }
-function mostraAlternativas(){
-    for (const alternativa of perguntaAtual.alternativas){
+function mostraAlternativas() {
+    caixaAlternativa.innerHTML ='';
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", function (){
-            posição++;
-            mostraPergunta();
-        });
+        botaoAlternativas.addEventListener("click",  () => repostasSelecionadas(alternativa));
         caixaAlternativa.appendChild(botaoAlternativas);
     }
+}
+function repostasSelecionadas(opcaoSelecionada){
+    const afirmacoes = opcaoSelecionada.afirmação;
+    respostas = afirmacoes;
+    posicao++;
+    mostraPergunta();
+}
+function mostraResultado(){
+    caixaPergunta.textContent = "Você acha que a inteligencia artificial vai ocupar empregos futuramente"
 }
 mostraPergunta();
