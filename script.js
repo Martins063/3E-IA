@@ -67,11 +67,13 @@ function mostraAlternativas() {
 }
 function repostasSelecionadas(opcaoSelecionada){
     const afirmacoes = opcaoSelecionada.afirmação;
-    respostas = afirmacoes;
+    respostas += afirmacoes + " ";
     posicao++;
     mostraPergunta();
 }
 function mostraResultado(){
-    caixaPergunta.textContent = "Você acha que a inteligencia artificial vai ocupar empregos futuramente"
+    caixaPergunta.textContent = "Você acha que a inteligencia artificial vai ocupar empregos futuramente";
+    textoResultado.textContent = respostas;
+    caixaAlternativa.textContent = "";
 }
 mostraPergunta();
