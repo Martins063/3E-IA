@@ -2,44 +2,36 @@ const caixaPrincipal = document.querySelector('.caixa-principal');
 const caixaPergunta = document.querySelector('.caixa-pergunta');
 const caixaAlternativa = document.querySelector('.caixa-alternativa');
 const caixaResultado = document.querySelector('.caixa-resultado');
+const textoResultado = document.querySelector('.texto-resultado');
 
-const perguntas = [//abre a lista de objetos (itens)
-    {//abre o item
-        enunciado: "Você gosta da Inteligência Artificial?",
-        alternativas: [{
-            texto: "Sim",
-            afirmação: "Afirmação da alternativa 1"
-        },
-        {
-            texto: "Não",
-            afirmação: "Afirmação da alternativa"
-        }
-        ]
+const perguntas = [     //serve para abrir lista de perguntas
+    {   //abre o objeto das perguntas
+        enunciado: "Você tem um plano de negócio?",
+        alternativas: [
+            {texto: "Sim",
+            afirmação:"Sim tenho meu plano de negócio"}, 
+
+            {texto: "Não",
+            afirmação:"Não tenho meu plano de negócio"}]
     },
-    {
-        enunciado: "Você utiliza inteligencia artificial no trabalho",
-        alternativas: [{
-            texto: "utilizo",
-            afirmação: "Afirmação da alternativa 1"
-        },
-        {
-            texto:"Não utilizo",
-            afirmação:"Afirmação da alternativa 2"
-        }
-        ]
+    { 
+        enunciado: "Você ja realizou uma pesquisa de mercado?",
+        alternativas: [
+            {texto: "Sim",
+            afirmação:"sim já realizei"}, 
+                
+            {texto: "Não",
+            afirmação:"Não realizei"}]
     },
-    {
-        enunciado: "Te ajuda muito no seu trabalho",
-        alternativas: [{
-            texto: "Sim",
-            afirmação: "Afirmação da alternativa 1"
-        },
-        {
-            texto: "Não",
-            afirmação: "Afirmação da alternativa"
-        }
-        ]
-    }
+    { 
+        enunciado: "Você tem financiamento suficiente para os primeiros meses de operação?",
+        alternativas: [
+            {texto: "Sim",
+            afirmação:"Sim tenho bastante dinheiro"}, 
+                
+            {texto: "Não",
+            afirmação:"Não tenho tou liso"}]
+    },
 ]
 let posicao = 0;
 let perguntaAtual;
@@ -57,23 +49,22 @@ function mostraPergunta() {
     mostraAlternativas();
 }
 function mostraAlternativas() {
-    caixaAlternativa.innerHTML ='';
     for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click",  () => repostasSelecionadas(alternativa));
+        botaoAlternativas.addEventListener("click",  () => respostasSelecionadas(alternativa));
         caixaAlternativa.appendChild(botaoAlternativas);
     }
 }
-function repostasSelecionadas(opcaoSelecionada){
+function respostasSelecionadas(opcaoSelecionada){
     const afirmacoes = opcaoSelecionada.afirmação;
     respostas += afirmacoes + " ";
     posicao++;
     mostraPergunta();
 }
 function mostraResultado(){
-    caixaPergunta.textContent = "Você acha que a inteligencia artificial vai ocupar empregos futuramente";
-    textoResultado.textContent = respostas;
+    caixaPergunta.textContent = "Confira suas respostas: ";
+    textoResultado.textContent = respostas; 
     caixaAlternativa.textContent = "";
 }
 mostraPergunta();
